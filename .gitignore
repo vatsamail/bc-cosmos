@@ -6,8 +6,12 @@ __pycache__/
 # C extensions
 *.so
 
+# gvim swap files
+*.swp
+
 # Distribution / packaging
 .Python
+actual_git/
 build/
 develop-eggs/
 dist/
