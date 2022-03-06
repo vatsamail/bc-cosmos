@@ -29,4 +29,4 @@
 * Refer: https://tutorials.cosmos.network/academy/3-running-a-chain/node-api-and-cli.html
 * git clone https://github.com/cosmos/cosmos-sdk
 * cd cosmos-sdk
-* 
+* make build
