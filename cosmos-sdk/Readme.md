@@ -6,7 +6,7 @@
 * https://tutorials.cosmos.network/academy/0-welcome/
 * https://docs.cosmos.network -SDK documentation
 * https://docs.tendermint.com/ - Tendermint documentation
-
+* 
 
 ### Notes: 
 #### Module 1: What is Cosmos?
