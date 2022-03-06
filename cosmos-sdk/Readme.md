@@ -24,3 +24,9 @@
 
 * Cosmos has tokens, wallets, sdks, apps, repos, sevices and tools
 * 
+
+### Dealing with cosmos sdk
+* Refer: https://tutorials.cosmos.network/academy/3-running-a-chain/node-api-and-cli.html
+* git clone https://github.com/cosmos/cosmos-sdk
+* cd cosmos-sdk
+* 
