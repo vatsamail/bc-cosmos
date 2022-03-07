@@ -24,9 +24,25 @@ var (
 )
 
 const (
-    opWeightMsgCreatePost = "op_weight_msg_create_chain"
+	opWeightMsgCreatePost = "op_weight_msg_create_chain"
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgCreatePost int = 100
+
+	opWeightMsgCheckers = "op_weight_msg_create_chain"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgCheckers int = 100
+
+	opWeightMsgCreateGame = "op_weight_msg_create_chain"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgCreateGame int = 100
+
+	opWeightMsgPlayMove = "op_weight_msg_create_chain"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgPlayMove int = 100
+
+	opWeightMsgRejectGame = "op_weight_msg_create_chain"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgRejectGame int = 100
 
 	// this line is used by starport scaffolding # simapp/module/const
 )
@@ -50,9 +66,8 @@ func (AppModule) ProposalContents(_ module.SimulationState) []simtypes.WeightedP
 
 // RandomizedParams creates randomized  param changes for the simulator
 func (am AppModule) RandomizedParams(_ *rand.Rand) []simtypes.ParamChange {
-	
-	return []simtypes.ParamChange{
-	}
+
+	return []simtypes.ParamChange{}
 }
 
 // RegisterStoreDecoder registers a decoder
@@ -71,6 +86,50 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgCreatePost,
 		checkerssimulation.SimulateMsgCreatePost(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgCheckers int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgCheckers, &weightMsgCheckers, nil,
+		func(_ *rand.Rand) {
+			weightMsgCheckers = defaultWeightMsgCheckers
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgCheckers,
+		checkerssimulation.SimulateMsgCheckers(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgCreateGame int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgCreateGame, &weightMsgCreateGame, nil,
+		func(_ *rand.Rand) {
+			weightMsgCreateGame = defaultWeightMsgCreateGame
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgCreateGame,
+		checkerssimulation.SimulateMsgCreateGame(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgPlayMove int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgPlayMove, &weightMsgPlayMove, nil,
+		func(_ *rand.Rand) {
+			weightMsgPlayMove = defaultWeightMsgPlayMove
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgPlayMove,
+		checkerssimulation.SimulateMsgPlayMove(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgRejectGame int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgRejectGame, &weightMsgRejectGame, nil,
+		func(_ *rand.Rand) {
+			weightMsgRejectGame = defaultWeightMsgRejectGame
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgRejectGame,
+		checkerssimulation.SimulateMsgRejectGame(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	// this line is used by starport scaffolding # simapp/module/operation

@@ -1,0 +1,5 @@
+message StoredGame {
+    ...
+    string deadline = 10;
+}
+
